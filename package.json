@@ -20,7 +20,7 @@
   "scripts": {
     "client": "react-scripts start",
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon config/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
