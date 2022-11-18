@@ -13,6 +13,12 @@ import CycloneIcon from "@mui/icons-material/Cyclone";
 import FaceIcon from "@mui/icons-material/Face";
 
 const NavBar = () => {
+  const navigateToLogin = () => {
+    window.location.href = "/login";
+  };
+  function navigateToSignUp() {
+    window.location.href = "/signup";
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={Styles.appBarStyle}>
@@ -20,8 +26,15 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={Styles.logoStyle}>
             Panacea
           </Typography>
-          <Button sx={Styles.loginButtonStyle}>Log in</Button>
-          <Button sx={Styles.defaultButtonStyle}>Sign up</Button>
+          <Button sx={Styles.loginButtonStyle} onClick={() => navigateToLogin}>
+            Log in
+          </Button>
+          <Button
+            sx={Styles.defaultButtonStyle}
+            onClick={() => navigateToSignUp}
+          >
+            Sign up
+          </Button>
           {/* <Button color="primary">
               <FaceIcon />
               &nbsp;Logout
