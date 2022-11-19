@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Styles from "./navBarStyle.js";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -26,15 +26,18 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={Styles.logoStyle}>
             Panacea
           </Typography>
-          <Button sx={Styles.loginButtonStyle} onClick={() => navigateToLogin}>
-            Log in
-          </Button>
-          <Button
-            sx={Styles.defaultButtonStyle}
-            onClick={() => navigateToSignUp}
-          >
-            Sign up
-          </Button>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Button sx={Styles.loginButtonStyle}>
+              Log in
+            </Button>
+          </Link>
+          <Link to="/signup" style={{ textDecoration: 'none' }}>
+            <Button
+              sx={Styles.signUpButtonStyle}
+            >
+              Sign up
+            </Button>
+          </Link>
           {/* <Button color="primary">
               <FaceIcon />
               &nbsp;Logout
