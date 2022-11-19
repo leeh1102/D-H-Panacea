@@ -1,3 +1,4 @@
+import * as Constants from '../../util/constants';
 
 const Styles = {
     appBarStyle: {
@@ -9,7 +10,7 @@ const Styles = {
         flexGrow: 1,
     },
     loginButtonStyle: {
-        bgcolor: '#FD794F',
+        bgcolor: Constants.ORANGE,
         color: '#fff',
     },
     defaultButtonStyle: {
