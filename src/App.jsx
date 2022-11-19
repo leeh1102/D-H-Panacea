@@ -7,18 +7,19 @@ import backgroundImage from "./assets/img/mainPageImage.png";
 import Search from "./components/search/search.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import Main from "./components/main/main.jsx";
+import LogIn from "./components/login/login.jsx";
+import SignUp from "./components/signup/signup.jsx";
 import { style } from "@mui/system";
 
 function App() {
   return (
     <>
-      <NavBar />
       <BrowserRouter>
+        <NavBar />
         <Routes path="/">
           <Route path="/" element={<Main />} />
-
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/signUp" element={<SignUp />} /> */}
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/filter" element={<Search />} />
         </Routes>
       </BrowserRouter>

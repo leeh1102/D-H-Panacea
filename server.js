@@ -25,6 +25,20 @@ if (process.env.NODE_ENV === "production") {
     })
 }
 
+// Curb Cores Error by adding a header
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    );
+    next();
+})
+
 app.get('/api', (req, res) => {
     res.send({ express: 'Hello From Express' })
 })
@@ -34,7 +48,7 @@ app.get('/api', (req, res) => {
 const bcrypt = require("bcrypt");
 const User = require("./schemas/user");
 // register endpoint
-app.post("/sign-up", (request, response) => {
+app.post("/signup", (request, response) => {
     // hash the password
     bcrypt
         .hash(request.body.password, 10)
@@ -42,6 +56,7 @@ app.post("/sign-up", (request, response) => {
             // create a new user instance and collect the data
             const user = new User({
                 _id: new mongoose.Types.ObjectId(),
+                name: request.body.firstName + " " + request.body.lastName,
                 email: request.body.email,
                 password: hashedPassword,
             });
@@ -89,7 +104,7 @@ app.post("/login", (req, res) => {
                     if (!passwordCheck) {
                         return res.status(400).send({
                             message: "Password is incorrect",
-                            error;
+                            error
                         });
                     }
 
@@ -101,13 +116,13 @@ app.post("/login", (req, res) => {
                         },
                         "RANDOM-TOKEN",
                         { expiresIn: "24h" }
-                    ),
-                        // return success response
-                        res.status(200).send({
-                            message: "Login successful",
-                            email: user.email,
-                            token,
-                        });
+                    );
+                    // return success response
+                    res.status(200).send({
+                        message: "Login successful",
+                        email: user.email,
+                        token,
+                    });
                 })
                 // catch error if password does not match
                 .catch((error) => {
@@ -124,6 +139,21 @@ app.post("/login", (req, res) => {
                 error,
             });
         });
+});
+
+// free endpoint
+app.get("/free-endpoint", (req, res) => {
+    res.json({
+        message: "You are free to access anytime."
+    });
+});
+
+const auth = require("./auth");
+// authentication endpoint
+app.get("/auth-endpoint", auth, (req, res) => {
+    res.json({
+        message: "You are authorized to access this endpoint."
+    });
 });
 
 
