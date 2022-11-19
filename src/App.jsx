@@ -5,7 +5,7 @@ import mainPageImage from "./assets/img/mainPageImage.png";
 import backgroundImage from "./assets/img/mainPageImage.png";
 
 import Search from "./components/search/search.jsx";
-import NavBar from "./components/navBar/navbar";
+import NavBar from "./components/navbar/navbar.jsx";
 import Main from "./components/main/main.jsx";
 import { style } from "@mui/system";
 
