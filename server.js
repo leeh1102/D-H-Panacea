@@ -74,6 +74,59 @@ app.post("/sign-up", (request, response) => {
 });
 
 
+// LOGIN A USER
+const jwt = require("jsonwebtoken");
+// login endpoint
+app.post("/login", (req, res) => {
+    User.findOne({ email: req.body.email })
+        // if email exists
+        .then((user) => {
+            // compare the passward entered and the hashed password in the database 
+            bcrypt
+                .compare(req.body.password, user.password)
+                .then((passwordCheck) => {
+                    // check if password matches
+                    if (!passwordCheck) {
+                        return res.status(400).send({
+                            message: "Password is incorrect",
+                            error;
+                        });
+                    }
+
+                    // create JWT token
+                    const token = jwt.sign(
+                        {
+                            userId: user._id,
+                            userEmail: user.email,
+                        },
+                        "RANDOM-TOKEN",
+                        { expiresIn: "24h" }
+                    ),
+                        // return success response
+                        res.status(200).send({
+                            message: "Login successful",
+                            email: user.email,
+                            token,
+                        });
+                })
+                // catch error if password does not match
+                .catch((error) => {
+                    res.status(400).send({
+                        messge: "Password does not match",
+                        error,
+                    });
+                });
+        })
+        // catch error if email does not exist
+        .catch((error) => {
+            res.status(404).send({
+                message: "Email does not exist",
+                error,
+            });
+        });
+});
+
+
 // Otherise, go to the FE
 app.listen(port, (err) => {
     if (err) return console.loge(err);
