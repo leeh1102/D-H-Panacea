@@ -109,6 +109,7 @@ const Search = () => {
               <MenuItem value={"ICBC - 60 minutes"}>ICBC - 60 minutes</MenuItem>
             </Select>
           </FormControl>
+          <Button sx={Styles.submitButtonStyle}>Search</Button>
         </Box>
       </div>
     </>

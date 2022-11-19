@@ -51,7 +51,15 @@ const Styles = {
 
 
 
-    }
+    },
+
+    submitButtonStyle: {
+        bgcolor: Constants.ORANGE,
+        color: '#ffffff',
+        borderRadius: 2,
+        display: 'flex',
+
+    },
 
 }
 export default Styles; 
