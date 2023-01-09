@@ -13,13 +13,30 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Styles from './signup.js';
 import axios from 'axios';
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Select, SelectChangeEvent } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
 
 export default function SignUp() {
+    // TODO: USER TYPE?
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [secondaryEmail, setSecondaryEmail] = React.useState('');
+    const [bod, setBod] = React.useState('');
+    const [phoneNum, setPhoneNum] = React.useState('');
+    const [address, setAddress] = React.useState('');
+    const [phn, setPhn] = React.useState('');
+    const [gender, setGender] = React.useState('');
     const [signup, setSignup] = React.useState(false);
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setGender(event.target.value);
+    };
 
     // set configurations
     const config = {
@@ -39,6 +56,7 @@ export default function SignUp() {
         // make the API call
         axios(config)
             .then((result) => {
+                alert('You have successfully signed up!');
                 setSignup(true);
             })
             .catch((error) => {
@@ -114,6 +132,41 @@ export default function SignUp() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 autoComplete="new-password"
                             />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="secondaryEmail"
+                                label="Secondary Email"
+                                id="secondaryEmail"
+                                value={secondaryEmail}
+                                onChange={(e) => setSecondaryEmail(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <MobileDatePicker
+                                    label="Date of Birth"
+                                    inputFormat='MM/DD/YYYY'
+                                    value={bod}
+                                    onChange={(e) => setBod(e.target.value)}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Select
+                                id="select-gender"
+                                value={gender}
+                                label="Gender"
+                                onChange={handleChange}
+                                fullWidth
+                            >
+                                <MenuItem value="Male">Male</MenuItem>
+                                <MenuItem value="Female">Female</MenuItem>
+                                <MenuItem value="Decline">Decline to answer</MenuItem>
+                            </Select>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel

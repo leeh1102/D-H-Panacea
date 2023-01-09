@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect("mongodb+srv://panacea:dhs9394@panacea0.e12fqfp.mongodb.net/test");
+    await mongoose.connect("mongodb+srv://panacea:dhs9394@panacea0.e12fqfp.mongodb.net/");
     console.log("Connected to MongoDB");
 }
 
