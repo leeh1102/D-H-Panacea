@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Styles from './login.js';
 import axios from 'axios';
+import { Icon } from '@mui/material';
+import { Apple, Facebook, Google } from '@mui/icons-material';
 
 export default function LogIn() {
     const [email, setEmail] = React.useState('');
@@ -22,7 +24,7 @@ export default function LogIn() {
     // set configurations
     const config = {
         method: "post",
-        url: "http://localhost:3000/login",
+        url: "http://localhost:3000/login",  // TO BE UPDATED
         data: {
             email,
             password
@@ -55,8 +57,8 @@ export default function LogIn() {
                 <Avatar sx={Styles.iconStyle}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Log in
+                <Typography component="h1" variant="h5" fontWeight="600">
+                    Log in to your account
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -96,15 +98,41 @@ export default function LogIn() {
                     >
                         Log In
                     </Button>
-                    <Grid container>
+                    <Typography
+                        sx={Styles.partitionStyle}>
+                        OR
+                    </Typography>
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        sx={Styles.ssoButtonStyle}
+                    >
+                        <Google sx={{ mr: 1 }} /> Continue with Google
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        sx={Styles.ssoButtonStyle}
+                    >
+                        <Facebook sx={{ mr: 1 }} /> Continue with Facebook
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        sx={Styles.ssoButtonStyle}
+                    >
+                        <Apple sx={{ mr: 1 }} /> Continue with Apple
+                    </Button>
+                    <Grid container sx={{ mt: 1 }}>
                         <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
                             </Link>
                         </Grid>
                         <Grid item>
+                            Don't have an account?
                             <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                {" Sign Up"}
                             </Link>
                         </Grid>
                     </Grid>
